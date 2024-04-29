@@ -26,12 +26,12 @@ public interface ClienteService extends GenericService<Cliente, Integer>{
 	@Query("SELECT COUNT(c) FROM Cliente c WHERE c.estado = ?1")
     public Long countByEstado(String estado);
 	
-	public Page<Cliente> findByIdTiid(Integer idTiid, Pageable pageable);
+	//public Page<Cliente> findByIdTiid(Integer idTiid, Pageable pageable);
 	
-	public List<Cliente> findByPrimerApellidoAndSegundoApellido(String primerApellido, String segundoApellido);
+	//public List<Cliente> findByPrimerApellidoAndSegundoApellido(String primerApellido, String segundoApellido);
 
-	public Page<ClienteDTO> obtenerClientesConUltimoPlanContratado(Pageable pageable);
+	//public Page<ClienteDTO> obtenerClientesConUltimoPlanContratado(Pageable pageable);
 	
-	public List<ClienteDTO> consultarClientesSegunCriterios(@Param("pEstado") String estado, @Param("pNumeroIdentificacion") String numeroIdentificacion, @Param("pTipoIdentificacion") Integer tipoIdentificacion, @Param("pNombre") String nombre);
+	//public List<ClienteDTO> consultarClientesSegunCriterios(@Param("pEstado") String estado, @Param("pNumeroIdentificacion") String numeroIdentificacion, @Param("pTipoIdentificacion") Integer tipoIdentificacion, @Param("pNombre") String nombre);
 
 }

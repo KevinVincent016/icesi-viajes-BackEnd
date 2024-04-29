@@ -100,25 +100,25 @@ public class ClienteServiceImpl implements ClienteService {
 		return clienteRepository.countByEstado(estado);
 	}
 
-	@Override
-	public Page<Cliente> findByIdTiid(Integer idTiid, Pageable pageable) {
-		return clienteRepository.findByIdTiid(idTiid, pageable);
-	}
+	//@Override
+	//public Page<Cliente> findByIdTiid(Integer idTiid, Pageable pageable) {
+		//return clienteRepository.findByIdTiid(idTiid, pageable);
+	//}
 
-	@Override
-	public List<Cliente> findByPrimerApellidoAndSegundoApellido(String primerApellido, String segundoApellido) {
-		return clienteRepository.findByPrimerApellidoAndSegundoApellido(primerApellido, segundoApellido);
-	}
+	//@Override
+	//public List<Cliente> findByPrimerApellidoAndSegundoApellido(String primerApellido, String segundoApellido) {
+		//return clienteRepository.findByPrimerApellidoAndSegundoApellido(primerApellido, segundoApellido);
+	//}
 
-	@Override
-	public Page<ClienteDTO> obtenerClientesConUltimoPlanContratado(Pageable pageable) {
-		return clienteRepository.obtenerClientesConUltimoPlanContratado(pageable);
-	}
+	//@Override
+	//public Page<ClienteDTO> obtenerClientesConUltimoPlanContratado(Pageable pageable) {
+	//	return clienteRepository.obtenerClientesConUltimoPlanContratado(pageable);
+	//}
 
-	@Override
-	public List<ClienteDTO> consultarClientesSegunCriterios(String estado, String numeroIdentificacion, Integer tipoIdentificacion, String nombre) {
-		return clienteRepository.consultarClientesSegunCriterios(estado, numeroIdentificacion, tipoIdentificacion, nombre);
-	}
+	//@Override
+	//public List<ClienteDTO> consultarClientesSegunCriterios(String estado, String numeroIdentificacion, Integer tipoIdentificacion, String nombre) {
+	//	return clienteRepository.consultarClientesSegunCriterios(estado, numeroIdentificacion, tipoIdentificacion, nombre);
+	//}
 
 	
 

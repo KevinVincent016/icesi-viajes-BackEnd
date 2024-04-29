@@ -77,10 +77,10 @@ public class DestinoServiceImpl implements DestinoService{
 		return destinoRepository.findByIdTide(id_tide);
 	}
 
-	@Override
-	public List<Destino> findDestinoActivo() {
-		return destinoRepository.findDestinoActivo();
-	}
+	//@Override
+	//public List<Destino> findDestinoActivo() {
+	//	return destinoRepository.findDestinoActivo();
+	//}
 	
 	//TRABAJO FINAL
 	

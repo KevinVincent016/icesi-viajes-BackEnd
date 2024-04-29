@@ -89,61 +89,6 @@ class ClienteTest {
 		System.out.println(clienteService.countByEstado("A"));
         
     }
-	
-	@Test
-    void debeRetornarClientesPorTipoIdentificacion() {
-       
-        Integer idTiid = 1;
 
-        Page<Cliente> clientePage = clienteService.findByIdTiid(idTiid, pageable);
-
-        List<Cliente> lstCliente = clientePage.getContent();
-
-        for (Cliente cliente : lstCliente) {
-            System.out.println(cliente.getNumeroIdentificacion() + " - " + cliente.getNombre());
-        }
-        
-    }	
-	
-	@Test
-    void debeRetornarClientesPorPrimerOSegundoApellido() {
-		
-		List<Cliente> lstCliente = clienteService.findByPrimerApellidoAndSegundoApellido("Gomez", null);
-		
-		for(Cliente cliente: lstCliente) {
-			System.out.println(cliente.getNombre() + " - " + cliente.getPrimerApellido() + " - " + cliente.getEstado());
-		}
-		
-	}
-	
-	//NativeQueries
-	
-	//15
-	@Test
-    void debeRetornarClientesConUltimoPlanContratado() {
-        PageRequest pageable = PageRequest.of(0, 10);
-        Page<ClienteDTO> clientesConUltimoPlan = clienteService.obtenerClientesConUltimoPlanContratado(pageable);
-
-        assertNotNull(clientesConUltimoPlan, "La página de clientes con último plan no debe ser nula");
-
-        for (ClienteDTO clienteDTO : clientesConUltimoPlan) {
-            System.out.println("Cliente: " + clienteDTO.getNombre() + " - " + clienteDTO.getNumeroIdentificacion() + " - " + clienteDTO.getEstado());
-            System.out.println("Último plan contratado:");
-            System.out.println("  - Estado: " + clienteDTO.getEstadoDetallePlan());
-            System.out.println("  - Alimentacion: " + clienteDTO.getAlimentacion());
-            System.out.println("  - Hospedaje: " + clienteDTO.getHospedaje());
-        }
-    }
-
-	//Puntos finales
-	
-	@Test
-    void consultarClientesSegunCriterios(){
-        List<ClienteDTO> lstCliente = clienteService.consultarClientesSegunCriterios("A",null,null,null);
-
-        for (ClienteDTO cliente : lstCliente){
-            System.out.println("Nro. Identidicaion: " + cliente.getNumeroIdentificacion() + " - Nombre: " + cliente.getNombre() + " - Estado: " + cliente.getEstado());
-        }
-    }
 	
 }

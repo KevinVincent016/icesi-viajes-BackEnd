@@ -13,15 +13,15 @@ public interface DestinoRepository extends JpaRepository<Destino, Integer>{
 	
 	public List<Destino> findByIdTide(Integer id_tide);
 	
-	@Query("SELECT d FROM Destino d WHERE d.estado = 'A'")
-	List<Destino> findDestinoActivo();
+	// @Query("SELECT d FROM Destino d WHERE d.estado = 'A'")
+	// List<Destino> findDestinoActivo();
 	
 	//TRABAJO FINAL
 	
-	public Destino crearDestino(Destino nuevoDestino);
+	//public Destino crearDestino(Destino nuevoDestino);
 	
-    public Destino editarDestino(Integer idDestino, Destino destinoActualizado);
+    //public Destino editarDestino(Integer idDestino, Destino destinoActualizado);
     
-    public Boolean eliminarDestino(Integer idDestino);
+    //public Boolean eliminarDestino(Integer idDestino);
 
 }

@@ -38,15 +38,4 @@ class DestinoTest {
 		
 	}
 	
-	@Test
-    void debeRetornarDestinosActivos() {
-		
-		List<Destino> lstDestino = destinoService.findDestinoActivo();
-		
-		for(Destino destino: lstDestino) {
-			System.out.println(destino.getIdTide() + " - H " + destino.getNombre());
-		}
-		
-	}
-	
 }
