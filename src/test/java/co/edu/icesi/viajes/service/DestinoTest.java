@@ -1,51 +1,52 @@
 package co.edu.icesi.viajes.service;
 
-import co.edu.icesi.viajes.domain.Destino;
-import co.edu.icesi.viajes.dto.DestinoDTO;
-import co.edu.icesi.viajes.dto.TipoIdentificacionDTO;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import java.util.List;
+
+import co.edu.icesi.viajes.domain.Destino;
 
 @SpringBootTest
-public class DestinoTest {
+class DestinoTest {
+	
+	@Autowired
+	private DestinoService destinoService;
 
-    @Autowired
-    DestinoService destinoService;
-
-    @Test
-    void consultarDestinoPorCodigoYEstadoActivo() {
-        Destino resultado = destinoService.consultarDestinoPorCodigoYEstadoActivo("D001");
-
-        System.out.println("Codigo: " + resultado.getCodigo() + " - Nombre: " + resultado.getNombre() + " - Descripcion " + resultado.getDescripcion() + " - Estado: " + resultado.getEstado());
-    }
-
-    @Test
-    void consultarDestinoPorTipoDestino() {
-        List<Destino> lstDestino = destinoService.consultarDestinosPorTipoDestino("7");
-
-        for (Destino destino : lstDestino) {
-            System.out.println("Nombre: " + destino.getNombre() + " - Descripcion " + destino.getDescripcion() + " - Tipo Destino: " + destino.getIdTide());
-        }
-    }
-
-    @Test
-    void consultarTodosLosDestinosActivos() {
-        List<Destino> lstDestino = destinoService.consultarDestinosActivos();
-
-        for (Destino destino : lstDestino) {
-            System.out.println("Nombre: " + destino.getNombre() + " - Tipo Destino: " + destino.getIdTide() + " - Estado: " + destino.getEstado());
-        }
-    }
-
-    @Test
-    void consultarDestinosYPlanesAsociadosYValor(){
-        List<DestinoDTO> lstDestinoDTO = destinoService.consultarDestinosYPlanesAsociadosYValor();
-
-        for (DestinoDTO destino : lstDestinoDTO) {
-            System.out.println("Nombre Destino: " + destino.getNombre() + " - Descripcion: " + destino.getDescripcion() + " - TotalPlanes: " + destino.getTotal_planes() + " - Promedio Valor Plan: " + destino.getPromedio_valor_plan());
-        }
-    }
-
+	@Test
+    void debeRetornarClientesPorPrimerOSegundoApellido() {
+		
+		Destino destino = destinoService.findByCodigoAndEstado("CARTA", "A");
+		
+		System.out.println(destino.getNombre() + " - " + destino.getDescripcion());
+		
+	}
+	
+	@Test
+    void debeRetornarDestinosPorTipoDestino() {
+		
+		Integer id = 2; 
+		
+		List<Destino> lstDestino = destinoService.findByIdTide(id);
+		
+		for(Destino destino: lstDestino) {
+			System.out.println(destino.getIdTide() + " - " + destino.getNombre() + " - " + destino.getDescripcion());
+		}
+		
+	}
+	
+	@Test
+    void debeRetornarDestinosActivos() {
+		
+		List<Destino> lstDestino = destinoService.findDestinoActivo();
+		
+		for(Destino destino: lstDestino) {
+			System.out.println(destino.getIdTide() + " - H " + destino.getNombre());
+		}
+		
+	}
+	
 }

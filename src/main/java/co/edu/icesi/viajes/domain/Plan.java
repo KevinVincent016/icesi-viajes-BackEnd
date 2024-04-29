@@ -1,10 +1,15 @@
 package co.edu.icesi.viajes.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,18 +17,19 @@ import jakarta.persistence.Table;
 public class Plan {
     
     @Id
-    @Column(name = "id_plan", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_plan")
     private Integer idPlan;
-    
+
     @Column(name = "codigo", nullable = false)
     private String codigo;
-    
+
     @Column(name = "descripcion_solicitud", nullable = false)
     private String descripcionSolicitud;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
-    
+
     @Column(name = "cantidad_personas", nullable = false)
     private Integer cantidadPersonas;
 
@@ -37,7 +43,7 @@ public class Plan {
     private Date fechaFinViaje;
 
     @Column(name = "valor_total", nullable = false)
-    private Double valorTotal;
+    private BigDecimal valorTotal;
 
     @Column(name = "fecha_creacion", nullable = false)
     private Date fechaCreacion;
@@ -47,16 +53,19 @@ public class Plan {
 
     @Column(name = "usu_creador", nullable = false)
     private String usuCreador;
-        
+
     @Column(name = "usu_modificador")
     private String usuModificador;
-    
+
     @Column(name = "estado", nullable = false)
     private String estado;
 
-    @Column(name = "id_clie", nullable = false)
-    private Integer idClie;
+    @ManyToOne
+    @JoinColumn(name = "id_clie", nullable = false)
+    private Cliente cliente;
 
-    @Column(name = "id_usua", nullable = false)
-    private Integer idUsua;
+    @ManyToOne
+    @JoinColumn(name = "id_usua", nullable = false)
+    private Usuario usuario;
+    
 }

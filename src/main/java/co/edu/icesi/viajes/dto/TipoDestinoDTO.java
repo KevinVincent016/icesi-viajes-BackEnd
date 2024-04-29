@@ -1,54 +1,37 @@
-package co.edu.icesi.viajes.domain;
+package co.edu.icesi.viajes.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+public class TipoDestinoDTO implements Serializable{
 
-@Entity
-@Table(name = "destino")
-public class Destino {
-    
-    @Id
-    @Column(name = "id_dest", nullable = false)
-    private Integer idDest;
-    
-    @Column(name = "codigo", nullable = false)
-    private String codigo;
-    
-    @Column(name = "nombre", nullable = false)
-    private String nombre;
-
-    @Column(name = "descripcion", nullable = false)
-    private String descripcion;
-
-    @Column(name = "fecha_creacion", nullable = false)
-    private Date fechaCreacion;
-
-    @Column(name = "fecha_modificacion")
-    private Date fechaModificacion;
-
-    @Column(name = "usu_creador", nullable = false)
-    private String usuCreador;
-        
-    @Column(name = "usu_modificador")
-    private String usuModificador;
-    
-    @Column(name = "estado", nullable = false)
-    private String estado;
-    
-    @Column(name = "id_tide", nullable = false)
-    private Integer idTide;
-
-	public Integer getIdDest() {
-		return idDest;
+	private static final long serialVersionUID = 6334646226855431916L;
+	
+	public TipoDestinoDTO(Integer idTide, String codigo, String nombre, String descripcion) {
+		super();
+		this.idTide = idTide;
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
 	}
 
-	public void setIdDest(Integer idDest) {
-		this.idDest = idDest;
-	}
+	private Integer idTide;
+
+	private String codigo;
+
+	private String nombre;
+
+	private String descripcion;
+
+	private Date fechaCreacion;
+
+	private Date fechaModificacion;
+
+	private String usuCreador;
+
+	private String usuModificador;
+
+	private String estado;
 
 	public Integer getIdTide() {
 		return idTide;
@@ -121,7 +104,7 @@ public class Destino {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-    
-    
-    
+	
+	
+
 }

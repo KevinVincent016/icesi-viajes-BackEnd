@@ -1,122 +1,149 @@
 package co.edu.icesi.viajes.service;
 
-import co.edu.icesi.viajes.domain.Cliente;
-import co.edu.icesi.viajes.dto.ClienteDTO;
-import jakarta.persistence.ColumnResult;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
+import co.edu.icesi.viajes.domain.Cliente;
+import co.edu.icesi.viajes.dto.ClienteDTO;
+
 @SpringBootTest
-public class ClienteTest {
+class ClienteTest {
 
-    @Autowired
-    ClienteService clienteservice;
+	@Autowired
+	private ClienteService clienteService;
+	
+	PageRequest pageable = PageRequest.of(0, 10);
 
-    @Test
-    void consultarClientesPorEstado() {
-        Pageable pageable = PageRequest.of(0, 10);
+	@Test
+    void debeRetornarPaginaDeNumeroIdentificacionPorEstadoAscendente() {
+        PageRequest pageable = PageRequest.of(0, 10); 
 
-        List<Cliente> lstCliente = clienteservice.consultarClientesPorEstado("A", pageable);
+        Page<Cliente> clientePage = clienteService.findByEstadoOrderByNumeroIdentificacionAsc("A", pageable);
+
+        List<Cliente> lstCliente = clientePage.getContent();
+
+        for(Cliente cliente: lstCliente) {
+            System.out.println(cliente.getNumeroIdentificacion() + " - " + cliente.getNombre());
+        }
+    }
+	
+	@Test
+    void debeRetornarListaClientePorCorreoIgnorando() {
+
+        Cliente cliente = clienteService.findByCorreoIgnoreCase("luisa@example.com");
+
+        System.out.println(cliente.getNumeroIdentificacion() + " - " + cliente.getNombre() + " - " + cliente.getCorreo());
+        
+    }
+	
+	@Test
+    void debeRetornarClientePorIdentificacionLike() {
+
+        Cliente cliente = clienteService.findByNumeroIdentificacionLike("444555666");
+
+        System.out.println(cliente.getNumeroIdentificacion() + " - " + cliente.getNombre() + " - " + cliente.getCorreo());
+        
+    }
+	
+	@Test
+    void debeRetornarClientePorNombreIgnoreCaseLike() {
+
+        Cliente cliente = clienteService.findByNombreIgnoreCaseLike("JuAn");
+
+        System.out.println(cliente.getNumeroIdentificacion() + " - " + cliente.getNombre() + " - " + cliente.getCorreo());
+        
+    }
+	
+	@Test
+    void debeRetornarClientesPorFechaNacimientoBetween() {
+        
+        LocalDate localDate = LocalDate.of(1984, 10, 19);
+        Date fechaInicio = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        
+        LocalDate localDate2 = LocalDate.of(1994, 10, 19);
+        Date fechaFin = Date.from(localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+		List<Cliente> lstCliente = clienteService.findByFechaNacimientoBetween(fechaInicio, fechaFin);
+		
+        for(Cliente cliente: lstCliente) {
+        	
+        	System.out.println(cliente.getFechaNacimiento() + " - " + cliente.getNombre() + " - " + cliente.getCorreo());
+        
+        }
+        
+    }
+	
+	@Test
+    void debeRetornarTotalClientesPorEstado() {
+		
+		System.out.println(clienteService.countByEstado("A"));
+        
+    }
+	
+	@Test
+    void debeRetornarClientesPorTipoIdentificacion() {
+       
+        Integer idTiid = 1;
+
+        Page<Cliente> clientePage = clienteService.findByIdTiid(idTiid, pageable);
+
+        List<Cliente> lstCliente = clientePage.getContent();
 
         for (Cliente cliente : lstCliente) {
-            System.out.println("ID: " + cliente.getIdClie() +
-                    " - Nombre: " + cliente.getNombre() + " - Estado " + cliente.getEstado());
+            System.out.println(cliente.getNumeroIdentificacion() + " - " + cliente.getNombre());
+        }
+        
+    }	
+	
+	@Test
+    void debeRetornarClientesPorPrimerOSegundoApellido() {
+		
+		List<Cliente> lstCliente = clienteService.findByPrimerApellidoAndSegundoApellido("Gomez", null);
+		
+		for(Cliente cliente: lstCliente) {
+			System.out.println(cliente.getNombre() + " - " + cliente.getPrimerApellido() + " - " + cliente.getEstado());
+		}
+		
+	}
+	
+	//NativeQueries
+	
+	//15
+	@Test
+    void debeRetornarClientesConUltimoPlanContratado() {
+        PageRequest pageable = PageRequest.of(0, 10);
+        Page<ClienteDTO> clientesConUltimoPlan = clienteService.obtenerClientesConUltimoPlanContratado(pageable);
+
+        assertNotNull(clientesConUltimoPlan, "La página de clientes con último plan no debe ser nula");
+
+        for (ClienteDTO clienteDTO : clientesConUltimoPlan) {
+            System.out.println("Cliente: " + clienteDTO.getNombre() + " - " + clienteDTO.getNumeroIdentificacion() + " - " + clienteDTO.getEstado());
+            System.out.println("Último plan contratado:");
+            System.out.println("  - Estado: " + clienteDTO.getEstadoDetallePlan());
+            System.out.println("  - Alimentacion: " + clienteDTO.getAlimentacion());
+            System.out.println("  - Hospedaje: " + clienteDTO.getHospedaje());
         }
     }
 
-    @Test
-    void consultarClientePorCorreoElectronico(){
-        List<Cliente> lstCliente = clienteservice.consultarClientePorCorreoElectronico("QwalKEr@he");
-
-        for (Cliente cliente : lstCliente) {
-            System.out.println("ID: " + cliente.getIdClie() +
-                    " - Nombre: " + cliente.getNombre() + " - Correo " + cliente.getCorreo());
-        }
-    }
-
-    @Test
-    void consultarClientePorNumeroDeIdentificacion(){
-        List<Cliente> lstCliente = clienteservice.consultarClientePorNumeroDeIdentificacion("8913212513");
-
-        for (Cliente cliente : lstCliente) {
-            System.out.println("ID: " + cliente.getIdClie() +
-                    " - Nombre: " + cliente.getNombre() + " - Numero de Identificacion " + cliente.getNumeroIdentificacion());
-        }
-    }
-
-    @Test
-    void consultarClientePorNombre(){
-        List<Cliente> lstCliente = clienteservice.consultarClientePorNombre("Carolyn");
-
-        for (Cliente cliente : lstCliente) {
-            System.out.println("ID: " + cliente.getIdClie() +
-                    " - Nombre: " + cliente.getNombre());
-        }
-    }
-
-    @Test
-    void consultarClientePorRangoDeFecha() throws ParseException {
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date fecha1 = dateFormat.parse("1960/10/10");
-        Date fecha2 = dateFormat.parse("1970/10/10");
-
-        List<Cliente> lstCliente = clienteservice.consultarClientePorRangoDeFecha(fecha1,fecha2);
-
-        for (Cliente cliente : lstCliente) {
-            System.out.println("ID: " + cliente.getIdClie() +
-                    " - Nombre: " + cliente.getNombre() + " - Fecha de naciemiento: " + cliente.getFechaNacimiento());
-        }
-    }
-
-    @Test
-    void consultarTotalClientesPorEstado(){
-        int results = clienteservice.consultarTotalClientesPorEstado("I");
-        System.out.println("Cantidad de clientes inactivos: " + results);
-    }
-
-    @Test
-    void consultarClientesPorTipoIdentificacion(){
-        Pageable pageable = PageRequest.of(0, 10);
-        List<Cliente> lstCliente = clienteservice.consultarClientesPorTipoIdentificacion(3, pageable);
-
-        for(Cliente cliente : lstCliente) {
-            System.out.println("ID: " + cliente.getIdClie() + " - Nombre: " + cliente.getNombre() + " - idTiid: " + cliente.getIdTiid());
-        }
-    }
-
-    @Test
-    void consultarClientePorApellidos() {
-        List<Cliente> lstCliente = clienteservice.consultarClientesPorApellido("Wagner", "Peck");
-
-        for(Cliente cliente : lstCliente) {
-            System.out.println("ID: " + cliente.getIdClie() + " - Nombre: " + cliente.getNombre() + " - Apellidos: " + cliente.getPrimerApellido() + " " + cliente.getSegundoApellido());
-        }
-    }
-
-    @Test
+	//Puntos finales
+	
+	@Test
     void consultarClientesSegunCriterios(){
-        List<ClienteDTO> lstCliente = clienteservice.consultarClientesSegunCriterios("A",null,null,null);
+        List<ClienteDTO> lstCliente = clienteService.consultarClientesSegunCriterios("A",null,null,null);
 
         for (ClienteDTO cliente : lstCliente){
-            System.out.println("N Identidicaion: " + cliente.getNumeroIdentificacion() + " - Nombre: " + cliente.getNombre() + " - Estado: " + cliente.getEstado());
+            System.out.println("Nro. Identidicaion: " + cliente.getNumeroIdentificacion() + " - Nombre: " + cliente.getNombre() + " - Estado: " + cliente.getEstado());
         }
     }
-
-    @Test
-    void consultarClientesSegunCriterios2(){
-        List<ClienteDTO> lstCliente = clienteservice.consultarClientesSegunCriterios("A",null,null,"Ana");
-
-        for (ClienteDTO cliente : lstCliente){
-            System.out.println("N Identidicaion: " + cliente.getNumeroIdentificacion() + " - Nombre: " + cliente.getNombre() + " - Estado: " + cliente.getEstado());
-        }
-    }
+	
 }

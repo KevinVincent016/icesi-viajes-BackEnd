@@ -1,37 +1,39 @@
 package co.edu.icesi.viajes.service;
 
-import co.edu.icesi.viajes.dto.TipoIdentificacionDTO;
-import co.edu.icesi.viajes.repository.ClienteRepository;
-import co.edu.icesi.viajes.repository.TipoIdentificacionRepository;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import java.util.List;
+
+import co.edu.icesi.viajes.domain.TipoIdentificacion;
 
 @SpringBootTest
-public class TipoIdentificacionTest {
+class TipoIdentificacionTest {
+	
+	@Autowired
+	private TipoIdentificacionService tipoIdentificacionService;
 
-    @Autowired
-    TipoIdentificacionService tipoIdentificacionService;
+	@Test
+    void debeRetornarListaTiposIdentificacionPorEstadoAlfabeticamente() {
+		
+		List<TipoIdentificacion> lstTipoIdentificacion = tipoIdentificacionService.findByEstadoOrderByNombreAsc("A");
+		
+		for(TipoIdentificacion tipoIdentificacion: lstTipoIdentificacion) {
+			System.out.println(tipoIdentificacion.getCodigo() + " - " + tipoIdentificacion.getNombre());
+		}
+		
+	}
+	
+	@Test
+    void debeRetornarTipoIdentificacionPorCodigoYEstado() {
+		
+		TipoIdentificacion tipoIdentificacion = tipoIdentificacionService.findByCodigoAndEstado("CE", "A");
 
-    @Test
-    void consultarTipoIdentificacionPorEstado() {
-
-        List<TipoIdentificacionDTO> lstTipoIdentificacion = tipoIdentificacionService.consultarTipoIdentificacionPorEstado("A");
-
-        for (TipoIdentificacionDTO tipoIdentificacion : lstTipoIdentificacion) {
-            System.out.println("Tipo de Identificacion: " + tipoIdentificacion.getIdTiid() + " - Nombre: " + tipoIdentificacion.getNombre() + " - Estado: " + tipoIdentificacion.getEstado());
-        }
-    }
-
-    @Test
-    void consultarTipoIdentificacionPorCodigoYEstado() {
-
-        List<TipoIdentificacionDTO> lstTipoIdentificacion = tipoIdentificacionService.consultarTipoIdentificacionPorCodigoYEstado("CC","A");
-
-        for (TipoIdentificacionDTO tipoIdentificacion : lstTipoIdentificacion) {
-            System.out.println("Tipo de Identificacion: " + tipoIdentificacion.getIdTiid() + " - Nombre: " + tipoIdentificacion.getNombre() + " - Estado: " + tipoIdentificacion.getEstado() + " - Codigo: " + tipoIdentificacion.getCodigo());
-        }
-    }
+		System.out.println(tipoIdentificacion.getCodigo() + " - " + tipoIdentificacion.getNombre() + " - " + tipoIdentificacion.getEstado());
+		
+	}
+	
+	
 
 }

@@ -1,22 +1,26 @@
 package co.edu.icesi.viajes.service;
 
-import co.edu.icesi.viajes.domain.Destino;
-import co.edu.icesi.viajes.dto.DestinoDTO;
-
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 
-public interface DestinoService extends GenericService<Destino,Integer>{
+import co.edu.icesi.viajes.domain.Destino;
 
-    //11. Consultar un destino por código y estado activo.
-    Destino consultarDestinoPorCodigoYEstadoActivo(String codigo);
+public interface DestinoService extends GenericService<Destino, Integer>{
+	
+	public Destino findByCodigoAndEstado(String codigo, String estado);
+	
+	public List<Destino> findByIdTide(Integer id_tide);
 
-    //12. Consultar los destinos por tipo de destino
-    List<Destino> consultarDestinosPorTipoDestino(String id_tide);
-
-    //13. Consultar todos los destinos activos, mostrando que tipo de destino es.
-    List<Destino> consultarDestinosActivos();
-
-    List<DestinoDTO> consultarDestinosYPlanesAsociadosYValor();
-
+	@Query("SELECT d FROM Destino d WHERE d.estado = 'A'")
+	List<Destino> findDestinoActivo();
+	
+	//TRABAJO FINAL
+	
+	public Destino crearDestino(Destino nuevoDestino);
+	
+    public Destino editarDestino(Integer idDestino, Destino destinoActualizado);
+    
+    public Boolean eliminarDestino(Integer idDestino);
+    
 }
