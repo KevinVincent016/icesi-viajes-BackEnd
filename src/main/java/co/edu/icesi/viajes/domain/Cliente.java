@@ -2,64 +2,10 @@ package co.edu.icesi.viajes.domain;
 
 import java.util.Date;
 
-import co.edu.icesi.viajes.dto.ClienteDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.NamedNativeQueries;
-import jakarta.persistence.NamedNativeQuery;
-import jakarta.persistence.SqlResultSetMapping;
-import jakarta.persistence.SqlResultSetMappings;
-import jakarta.persistence.ColumnResult;
-import jakarta.persistence.ConstructorResult;
-
-//@NamedNativeQueries({
-	// @NamedNativeQuery(name = "Cliente.obtenerClientesConUltimoPlanContratado", query = "", resultSetMapping = "obtenerClientesConUltimoPlanContratado"),
-    // @NamedNativeQuery(name = "Cliente.consultarClientesSegunCriterios", query = "", resultSetMapping = "consultarClientesSegunCriterios"),
-    //})
-
-//@SqlResultSetMappings({
-	//  @SqlResultSetMapping(name = "obtenerClientesConUltimoPlanContratado", classes = {
-    		//     @ConstructorResult(targetClass = ClienteDTO.class, columns = {
-        		//       @ColumnResult(name = "idClie", type = Integer.class),
-            //       @ColumnResult(name = "numeroIdentificacion", type = String.class),
-            //       @ColumnResult(name = "primerApellido", type = String.class),
-            //       @ColumnResult(name = "segundoApellido", type = String.class),
-            //       @ColumnResult(name = "nombre", type = String.class),
-            //       @ColumnResult(name = "telefono1", type = String.class),
-            //       @ColumnResult(name = "telefono2", type = String.class),
-            //       @ColumnResult(name = "correo", type = String.class),
-            //       @ColumnResult(name = "sexo", type = String.class),
-            //  @ColumnResult(name = "fechaNacimiento", type = Date.class),
-            //   @ColumnResult(name = "fechaCreacion", type = Date.class),
-            //  @ColumnResult(name = "fechaModificacion", type = Date.class),
-            //  @ColumnResult(name = "usuCreador", type = String.class),
-            //  @ColumnResult(name = "usuModificador", type = String.class),
-            // @ColumnResult(name = "estado", type = String.class),
-            //      @ColumnResult(name = "idDetallePlan", type = Integer.class),
-            // Detalleplan
-            //      @ColumnResult(name = "alimentacion", type = String.class),
-            //        @ColumnResult(name = "hospedaje", type = String.class),
-            //        @ColumnResult(name = "transporte", type = String.class),
-            //         @ColumnResult(name = "traslados", type = String.class),
-            //         @ColumnResult(name = "valor", type = Double.class),
-            //         @ColumnResult(name = "cantidadNoches", type = Integer.class),
-            //         @ColumnResult(name = "cantidadDias", type = Integer.class),
-            //         @ColumnResult(name = "fechaCreacionDetallePlan", type = Date.class),
-            //         @ColumnResult(name = "fechaModificacionDetallePlan", type = Date.class),
-            //         @ColumnResult(name = "usuCreadorDetallePlan", type = String.class),
-            //         @ColumnResult(name = "usuModificadorDetallePlan", type = String.class),
-            //         @ColumnResult(name = "estadoDetallePlan", type = String.class),
-            //    })
-        // })})
-//    @SqlResultSetMapping(name = "consultarClientesSegunCriterios", classes = {
-    		//            @ConstructorResult(targetClass = ClienteDTO.class, columns = {
-            		//                @ColumnResult(name = "numeroIdentificacion", type = String.class),
-                //                @ColumnResult(name = "nombre", type = String.class),
-                //               @ColumnResult(name = "estado", type = String.class),
-                //       })
-//})
 
 
 @Entity
