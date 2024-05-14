@@ -15,11 +15,16 @@ import org.springframework.data.domain.PageRequest;
 
 import co.edu.icesi.viajes.domain.Cliente;
 import co.edu.icesi.viajes.dto.ClienteDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @SpringBootTest
 class ClienteTest {
 
-	@Autowired
+    private static final Logger logger = LoggerFactory.getLogger(ClienteTest.class);
+
+
+    @Autowired
 	private ClienteService clienteService;
 	
 	PageRequest pageable = PageRequest.of(0, 10);
@@ -33,7 +38,7 @@ class ClienteTest {
         List<Cliente> lstCliente = clientePage.getContent();
 
         for(Cliente cliente: lstCliente) {
-            System.out.println(cliente.getNumeroIdentificacion() + " - " + cliente.getNombre());
+            logger.info("{} - {}", cliente.getNumeroIdentificacion(), cliente.getNombre());
         }
     }
 	
@@ -42,7 +47,7 @@ class ClienteTest {
 
         Cliente cliente = clienteService.findByCorreoIgnoreCase("luisa@example.com");
 
-        System.out.println(cliente.getNumeroIdentificacion() + " - " + cliente.getNombre() + " - " + cliente.getCorreo());
+        logger.info("{} - {} - {}", cliente.getNumeroIdentificacion(), cliente.getNombre(), cliente.getCorreo());
         
     }
 	
@@ -51,7 +56,7 @@ class ClienteTest {
 
         Cliente cliente = clienteService.findByNumeroIdentificacionLike("444555666");
 
-        System.out.println(cliente.getNumeroIdentificacion() + " - " + cliente.getNombre() + " - " + cliente.getCorreo());
+        logger.info("{} - {} - {}", cliente.getNumeroIdentificacion(), cliente.getNombre(), cliente.getCorreo());
         
     }
 	
@@ -60,7 +65,7 @@ class ClienteTest {
 
         Cliente cliente = clienteService.findByNombreIgnoreCaseLike("JuAn");
 
-        System.out.println(cliente.getNumeroIdentificacion() + " - " + cliente.getNombre() + " - " + cliente.getCorreo());
+        logger.info("{} - {} - {}", cliente.getNumeroIdentificacion(), cliente.getNombre(), cliente.getCorreo());
         
     }
 	
@@ -76,8 +81,8 @@ class ClienteTest {
 		List<Cliente> lstCliente = clienteService.findByFechaNacimientoBetween(fechaInicio, fechaFin);
 		
         for(Cliente cliente: lstCliente) {
-        	
-        	System.out.println(cliente.getFechaNacimiento() + " - " + cliente.getNombre() + " - " + cliente.getCorreo());
+
+            logger.info("{} - {} - {}", cliente.getFechaNacimiento(), cliente.getNombre(), cliente.getCorreo());
         
         }
         
@@ -85,8 +90,9 @@ class ClienteTest {
 	
 	@Test
     void debeRetornarTotalClientesPorEstado() {
-		
-		System.out.println(clienteService.countByEstado("A"));
+        long count = clienteService.countByEstado("A");
+
+        logger.info("Total clients with state 'A': {}", count);
         
     }
 
