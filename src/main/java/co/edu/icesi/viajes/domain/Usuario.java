@@ -41,8 +41,8 @@ public class Usuario {
     
     @Column(name = "correo", nullable = false)
     private String correo;
-    
-    @Column(name = "idRol", nullable = false)
+
+    @Column(name = "idrol", nullable = false)
     private String idRol;
 
     public Integer getIdUsua() {

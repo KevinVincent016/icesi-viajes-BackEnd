@@ -3,5 +3,5 @@ package co.edu.icesi.viajes.service;
 import co.edu.icesi.viajes.domain.Usuario;
 
 public interface UsuarioService extends GenericService<Usuario, Integer> {
-	Usuario autenticarUsuario(String login, String password);
+	Usuario logearUsuario(String login, String password);
 }

@@ -1,5 +1,6 @@
 package co.edu.icesi.viajes.controller;
 
+import co.edu.icesi.viajes.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class UsuarioController {
 
 	@PostMapping("/logear")
     public ResponseEntity<?> logearUsuario(@RequestBody LoginDataDTO loginData) {
-        Usuario usuario = usuarioService.autenticarUsuario(loginData.getLogin(), loginData.getPassword());
+        Usuario usuario = usuarioService.logearUsuario(loginData.getLogin(), loginData.getPassword());
         if (usuario != null) {
             return ResponseEntity.ok(usuario);
         } else {

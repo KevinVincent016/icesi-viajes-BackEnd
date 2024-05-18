@@ -1,6 +1,7 @@
 package co.edu.icesi.viajes.service;
 
 import co.edu.icesi.viajes.domain.Usuario;
+import co.edu.icesi.viajes.dto.UsuarioDTO;
 import co.edu.icesi.viajes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -58,9 +59,10 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 
 	@Override
-	public Usuario autenticarUsuario(String login, String password) {
+	public Usuario logearUsuario(String login, String password) {
 
-		Usuario usuario = usuarioRepository.findByLogin(login);
+		Usuario usuario = usuarioRepository.findByLoginU(login);
+		System.out.println(usuario);
 		if (usuario != null && usuario.getPasswordU().equals(password)) {
 			return usuario;
 		}
