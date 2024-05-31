@@ -1,27 +1,23 @@
 package co.edu.icesi.viajes.controller;
 
+import co.edu.icesi.viajes.dto.LoginDataDTO;
 import co.edu.icesi.viajes.dto.UsuarioDTO;
+import co.edu.icesi.viajes.service.UsuarioService;
+import co.edu.icesi.viajes.domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import co.edu.icesi.viajes.service.UsuarioService;
-import co.edu.icesi.viajes.domain.Usuario;
-import co.edu.icesi.viajes.dto.LoginDataDTO;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
 @CrossOrigin(origins = "http://localhost:3000")
 public class UsuarioController {
-    
-    @Autowired
-	private UsuarioService usuarioService;
 
-	@PostMapping("/logear")
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @PostMapping("/logear")
     public ResponseEntity<?> logearUsuario(@RequestBody LoginDataDTO loginData) {
         Usuario usuario = usuarioService.logearUsuario(loginData.getLogin(), loginData.getPassword());
         if (usuario != null) {
@@ -31,4 +27,13 @@ public class UsuarioController {
         }
     }
 
+    @PostMapping("/crear")
+    public ResponseEntity<String> createUser(@RequestBody Usuario usuario) {
+        try {
+            usuarioService.crearUsuario(usuario);
+            return new ResponseEntity<>("Usuario creado exitosamente", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al crear el usuario: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

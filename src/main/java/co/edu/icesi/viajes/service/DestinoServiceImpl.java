@@ -17,6 +17,8 @@ public class DestinoServiceImpl implements DestinoService{
 	
 	@Autowired
 	private DestinoRepository destinoRepository;
+	
+	private static int contador = 0;
 
 	@Override
 	public List<Destino> findAll() {
@@ -83,13 +85,6 @@ public class DestinoServiceImpl implements DestinoService{
 	//}
 	
 	//TRABAJO FINAL
-	
-	@Override
-	public Destino crearDestino(Destino nuevoDestino) {
-	    nuevoDestino.setFechaCreacion(new Date());
-	    nuevoDestino.setEstado("A");
-	    return destinoRepository.save(nuevoDestino);
-	}
 
 	@Override
 	public Destino editarDestino(Integer idDestino, Destino destinoActualizado) {
@@ -114,5 +109,29 @@ public class DestinoServiceImpl implements DestinoService{
 	        return false;
 	    }
 	}
+	
+	
+	@Override
+    public Destino crearDestino(Destino nuevoDestino) {
+        // Incrementa el contador
+        contador++;
+
+        // Genera el código del destino con el formato "D0001"
+        String codigo = "D" + String.format("%04d", contador);
+
+        // Asigna el código al destino
+        nuevoDestino.setCodigo(codigo);
+
+        // Resto de la lógica para guardar el destino en la base de datos
+        // ...
+
+        // Guarda el destino en la base de datos
+        
+        nuevoDestino.setFechaCreacion(new Date());
+        nuevoDestino.setEstado("A");
+        
+        return destinoRepository.save(nuevoDestino);
+    }
+
 
 }

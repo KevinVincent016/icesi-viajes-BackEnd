@@ -7,5 +7,4 @@ import org.springframework.data.repository.query.Param;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     Usuario findByLoginU(String login);
-    
 }

@@ -4,6 +4,8 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,7 +13,8 @@ import jakarta.persistence.Table;
 @Table(name = "usuario")
 public class Usuario {
     
-    @Id
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Generación automática del ID
     @Column(name = "id_usua", nullable = false)
     private Integer idUsua;
     
@@ -43,7 +46,7 @@ public class Usuario {
     private String correo;
 
     @Column(name = "idrol", nullable = false)
-    private String idRol;
+    private Integer idRol;
 
     public Integer getIdUsua() {
         return idUsua;
@@ -125,11 +128,11 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getIdRol() {
+    public Integer getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(String idRol) {
+    public void setIdRol(Integer idRol) {
         this.idRol = idRol;
     }
 

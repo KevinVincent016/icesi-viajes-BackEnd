@@ -6,7 +6,7 @@ public class UsuarioDTO {
     
     public UsuarioDTO(Integer idUsua, String loginU, String passwordU, String nombre, String apellido,
             Date fechaCreacion, Date fechaModificacion, String usuCreador, String usuModificador, String correo,
-            String idRol) {
+            Integer idRol) {
         this.idUsua = idUsua;
         this.loginU = loginU;
         this.passwordU = passwordU;
@@ -30,7 +30,7 @@ public class UsuarioDTO {
     private String usuCreador;
     private String usuModificador;
     private String correo;
-    private String idRol;
+    private Integer idRol;
     
     public Integer getIdUsua() {
         return idUsua;
@@ -92,10 +92,10 @@ public class UsuarioDTO {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    public String getIdRol() {
+    public Integer getIdRol() {
         return idRol;
     }
-    public void setIdRol(String idRol) {
+    public void setIdRol(Integer idRol) {
         this.idRol = idRol;
     }
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,4 +69,17 @@ public class UsuarioServiceImpl implements UsuarioService{
 		}
 		return null;
 	}
+	
+	@Override
+    public Usuario crearUsuario(Usuario usuario) throws Exception {
+        if (usuario.getIdRol() == null) {
+            throw new Exception("El campo idRol no puede estar vacío");
+        }
+        usuario.setFechaCreacion(new Date());
+        usuario.setFechaModificacion(new Date());
+        usuario.setUsuCreador("CLOPEZ");
+        usuario.setUsuModificador("CLOPEZ");
+        return usuarioRepository.save(usuario);
+    }
+	
 }

@@ -14,5 +14,7 @@ public interface TipoDestinoService extends GenericService<TipoDestino, Integer>
 	
 	@Query("select tp from TipoDestino tp order by tp.nombre")
 	public List<TipoDestino> tipoDestinoAlf();
+
+	List<TipoDestino> obtenerTodos();
 	
 }

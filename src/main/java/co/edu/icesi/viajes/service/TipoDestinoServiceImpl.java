@@ -80,5 +80,10 @@ public class TipoDestinoServiceImpl implements TipoDestinoService {
 	public List<TipoDestino> tipoDestinoAlf() {
 		return tipoDestinoRepository.tipoDestinoAlf();
 	}
+	
+	@Override
+	public List<TipoDestino> obtenerTodos() {
+        return tipoDestinoRepository.findAll();
+    }
 
 }

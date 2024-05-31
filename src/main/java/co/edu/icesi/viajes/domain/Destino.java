@@ -2,8 +2,12 @@ package co.edu.icesi.viajes.domain;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,7 +15,8 @@ import jakarta.persistence.Table;
 @Table(name = "destino")
 public class Destino {
     
-    @Id
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_dest", nullable = false)
     private Integer idDest;
     
@@ -40,6 +45,7 @@ public class Destino {
     private String estado;
     
     @Column(name = "id_tide", nullable = false)
+    @JsonProperty("id_tide")
     private Integer idTide;
 
 	public Integer getIdDest() {
