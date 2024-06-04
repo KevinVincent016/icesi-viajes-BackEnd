@@ -6,8 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "permiso")
 public class Permiso {
     
@@ -22,28 +28,6 @@ public class Permiso {
     @Column(name = "descripcion")
     private String descripcion;
 
-    public Integer getIdPermiso() {
-        return idPermiso;
-    }
 
-    public void setIdPermiso(Integer idPermiso) {
-        this.idPermiso = idPermiso;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
     
 }

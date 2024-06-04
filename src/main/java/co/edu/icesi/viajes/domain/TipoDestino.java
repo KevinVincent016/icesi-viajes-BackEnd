@@ -24,7 +24,9 @@ import jakarta.persistence.SqlResultSetMappings;
 
 import jakarta. persistence. Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @NamedNativeQueries ({
 	@NamedNativeQuery (name="TipoDestino.consultarTipoDestinoPorEstado", query="", resultSetMapping="consultarTipoDestinoPorEstado"),
@@ -47,6 +49,9 @@ import lombok.Data;
 })
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tipo_destino")
 public class TipoDestino {
 	

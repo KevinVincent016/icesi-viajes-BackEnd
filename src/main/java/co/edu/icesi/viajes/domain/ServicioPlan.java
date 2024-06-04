@@ -8,8 +8,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "servicio_plan")
 public class ServicioPlan {
 
@@ -29,35 +35,5 @@ public class ServicioPlan {
     @Column(name = "cantidad", nullable = false)
     private Integer cantidad;
 
-    public Integer getIdAddPlan() {
-        return idAddPlan;
-    }
 
-    public void setIdAddPlan(Integer idAddPlan) {
-        this.idAddPlan = idAddPlan;
-    }
-
-    public Plan getPlan() {
-        return plan;
-    }
-
-    public void setPlan(Plan plan) {
-        this.plan = plan;
-    }
-
-    public Servicio getAñadidos() {
-        return servicio;
-    }
-
-    public void setAñadidos(Servicio añadidos) {
-        this.servicio = añadidos;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
 }
