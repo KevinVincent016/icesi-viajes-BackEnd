@@ -54,7 +54,7 @@ public class Usuario {
     @Column(name = "idrol", nullable = false)
     private Integer idRol;
 
-    
+
     
     
 }
