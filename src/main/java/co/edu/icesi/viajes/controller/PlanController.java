@@ -26,20 +26,20 @@ public class PlanController {
         return new ResponseEntity<>(PlanMapper.INSTANCE.toDTO(createdPlan), HttpStatus.CREATED);
     }
 
-    @GetMapping("buscarPlan/{id}")
+    @GetMapping("/buscarPlan/{id}")
     public ResponseEntity<PlanDTO> obtenerPlan(@PathVariable Integer id) {
         Plan plan = planService.findById(id).orElse(null);
         return new ResponseEntity<>(PlanMapper.INSTANCE.toDTO(plan), HttpStatus.OK);
     }
 
-    @GetMapping("obtenerPlanes")
+    @GetMapping("/obtenerPlanes")
     public ResponseEntity<List<PlanDTO>> getAllPlans() {
         List<Plan> plans = planService.findAll();
         List<PlanDTO> planDTOs = plans.stream().map(PlanMapper.INSTANCE::toDTO).collect(Collectors.toList());
         return new ResponseEntity<>(planDTOs, HttpStatus.OK);
     }
 
-    @PutMapping("actualizarPlan/{id}")
+    @PutMapping("/actualizarPlan/{id}")
     public ResponseEntity<PlanDTO> actualizarPlan(@PathVariable Integer id, @RequestBody PlanDTO planDTO) throws Exception {
         if (!planDTO.getIdPlan().equals(id)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -48,7 +48,7 @@ public class PlanController {
         return new ResponseEntity<>(PlanMapper.INSTANCE.toDTO(updatedPlan), HttpStatus.OK);
     }
 
-    @DeleteMapping("eliminarPlan/{id}")
+    @DeleteMapping("/eliminarPlan/{id}")
     public ResponseEntity<Void> eliminarPlan(@PathVariable Integer id) throws Exception {
         planService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

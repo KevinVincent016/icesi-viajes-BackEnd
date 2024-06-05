@@ -13,7 +13,7 @@ public class RolController {
     @Autowired
     private RolService rolService;
 
-    @GetMapping("nombre/{id}")
+    @GetMapping("/nombre/{id}")
     public String findNombreById(@PathVariable Integer id) {
         return rolService.findNombreById(id);
     }
