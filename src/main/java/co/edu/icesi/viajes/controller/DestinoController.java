@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/destinos")
@@ -36,4 +37,29 @@ public class DestinoController {
         List<DestinoDTOEndpoint> destinosDTO = DestinoEndpointMapper.INSTANCE.toDTOEndpointList(destinos);
         return new ResponseEntity<>(destinosDTO, HttpStatus.OK);
     }
+
+    @GetMapping(value = "buscarDestino/{id}")
+    public ResponseEntity<?> buscarDestino( @PathVariable Integer id)
+    {
+        Optional<DestinoDTOEndpoint> destino = destinoService.findById(id).map(DestinoEndpointMapper.INSTANCE::toDTOEndpoint);
+        if (destino.isPresent()) {
+            return new ResponseEntity<>(destino, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("El destino que busca no existe", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping(value = "eliminarDestino/{id}")
+    public ResponseEntity<?> eliminarDestino(@PathVariable Integer id) {
+        try {
+            destinoService.deleteById(id);
+            return new ResponseEntity<>("Destino eliminado exitosamente", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al eliminar el destino: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
+
 }
