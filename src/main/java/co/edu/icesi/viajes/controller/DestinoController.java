@@ -31,14 +31,14 @@ public class DestinoController {
         }
     }
 
-    @GetMapping(value = "destinos")
+    @GetMapping(value = "/destinos")
     public ResponseEntity<List<DestinoDTOEndpoint>> obtenerDestinos() {
         List<Destino> destinos = destinoService.findAll();
         List<DestinoDTOEndpoint> destinosDTO = DestinoEndpointMapper.INSTANCE.toDTOEndpointList(destinos);
         return new ResponseEntity<>(destinosDTO, HttpStatus.OK);
     }
 
-    @GetMapping(value = "buscarDestino/{id}")
+    @GetMapping(value = "/buscarDestino/{id}")
     public ResponseEntity<?> buscarDestino( @PathVariable Integer id)
     {
         Optional<DestinoDTOEndpoint> destino = destinoService.findById(id).map(DestinoEndpointMapper.INSTANCE::toDTOEndpoint);
@@ -49,7 +49,7 @@ public class DestinoController {
         }
     }
 
-    @DeleteMapping(value = "eliminarDestino/{id}")
+    @DeleteMapping(value = "/eliminarDestino/{id}")
     public ResponseEntity<?> eliminarDestino(@PathVariable Integer id) {
         try {
             destinoService.deleteById(id);
