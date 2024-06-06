@@ -66,4 +66,8 @@ public class PlanServiceImpl implements PlanService{
 		return planRepository.count();
 	}
 
+	@Override
+	public List<Plan> findTop3ByOrderByFechaCreacionDesc() {
+		return planRepository.findTop3ByOrderByFechaCreacionDesc();
+	}
 }

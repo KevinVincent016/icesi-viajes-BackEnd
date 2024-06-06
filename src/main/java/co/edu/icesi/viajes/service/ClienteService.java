@@ -23,7 +23,6 @@ public interface ClienteService extends GenericService<Cliente, Integer>{
 	
 	public List<Cliente> findByFechaNacimientoBetween(Date fechaInicio, Date fechaFin);
 	
-	@Query("SELECT COUNT(c) FROM Cliente c WHERE c.estado = ?1")
     public Long countByEstado(String estado);
 	
 	//public Page<Cliente> findByIdTiid(Integer idTiid, Pageable pageable);

@@ -53,4 +53,11 @@ public class PlanController {
         planService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/ultimos")
+    public ResponseEntity<List<PlanDTO>> getUltimosPlanes() {
+        List<Plan> planes = planService.findTop3ByOrderByFechaCreacionDesc();
+        List<PlanDTO> planDTOs = planes.stream().map(PlanMapper.INSTANCE::toDTO).collect(Collectors.toList());
+        return new ResponseEntity<>(planDTOs, HttpStatus.OK);
+    }
 }
