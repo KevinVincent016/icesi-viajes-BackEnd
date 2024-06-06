@@ -10,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DestinoDTOEndpoint {
+	
     private Integer idDest;
     private String codigo;
     private String nombre;

@@ -59,7 +59,21 @@ public class DestinoController {
         }
     }
 
-
-
+    @PutMapping("/modificar-destino/{id}")
+    public ResponseEntity<?> modificarDestino(@PathVariable Integer id, @RequestBody DestinoDTOEndpoint destinoDTO) {
+        try {
+            Optional<DestinoDTOEndpoint> destinoOptional = destinoService.findById(id).map(DestinoEndpointMapper.INSTANCE::toDTOEndpoint);
+            if (destinoOptional.isPresent()) {
+                Destino destinoActualizado = DestinoEndpointMapper.INSTANCE.toEntity(destinoDTO);
+                destinoActualizado.setIdDest(id);
+                destinoService.update(destinoActualizado);
+                return new ResponseEntity<>("Destino modificado exitosamente", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("El destino que intenta modificar no existe", HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al modificar el destino: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

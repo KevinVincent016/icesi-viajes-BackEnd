@@ -1,5 +1,8 @@
 package co.edu.icesi.viajes.domain;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,32 +15,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "reserva")
-public class Reserva {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_reserva")
-    private Integer idReserva;
+@Table(name = "plan_destino")
+public class PlanDestino {
 
     @Id
     @Column(name = "id_plan")
     private Integer idPlan;
 
-    @Column(name = "personas", nullable = false)
-    private Integer personas;
-
-    @Column(name = "valor", nullable = false)
-    private BigDecimal valor;
-
     @Id
-    @Column(name = "id_clie")
-    private Integer idClie;
+    @Column(name = "id_dest")
+    private Integer idDest;
 
 }

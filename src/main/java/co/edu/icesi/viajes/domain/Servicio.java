@@ -31,5 +31,7 @@ public class Servicio {
     @Column(name = "transportes", nullable = false)
     private Boolean transportes;
 
+    @Column(name = "descripcion")
+    private Boolean descripcion;
 
 }

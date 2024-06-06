@@ -18,9 +18,9 @@ public interface DestinoService extends GenericService<Destino, Integer>{
 	//TRABAJO FINAL
 	
 	public Destino crearDestino(Destino nuevoDestino);
-	
-    public Destino editarDestino(Integer idDestino, Destino destinoActualizado);
+
+	public Destino editarDestino(Integer idDestino, Destino destinoActualizado);
     
     public Boolean eliminarDestino(Integer idDestino);
-    
+
 }

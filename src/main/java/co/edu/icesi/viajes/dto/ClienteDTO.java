@@ -13,10 +13,6 @@ import java.util.Date;
 public class ClienteDTO implements Serializable {
 
 	private static final long serialVersionUID = 8460626525156785057L;
-	
-
-
-
 
 	private Integer id_clie;
     private String numeroIdentificacion;

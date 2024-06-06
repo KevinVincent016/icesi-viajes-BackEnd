@@ -81,5 +81,25 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuario.setUsuModificador("CLOPEZ");
         return usuarioRepository.save(usuario);
     }
+
+	@Override
+	public Usuario modificarUsuario(Integer id, UsuarioDTO usuarioDTO) throws Exception {
+		Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
+		if (optionalUsuario.isPresent()) {
+			Usuario usuario = optionalUsuario.get();
+			usuario.setLoginU(usuarioDTO.getLoginU());
+			usuario.setPasswordU(usuarioDTO.getPasswordU());
+			usuario.setNombre(usuarioDTO.getNombre());
+			usuario.setApellido(usuarioDTO.getApellido());
+			usuario.setCorreo(usuarioDTO.getCorreo());
+			usuario.setFechaModificacion(new Date());
+			usuario.setUsuModificador("alguien");
+			usuario.setIdRol(usuarioDTO.getIdRol());
+
+			return usuarioRepository.save(usuario);
+		} else {
+			throw new Exception("El usuario con ID " + id + " no fue encontrado");
+		}
+	}
 	
 }

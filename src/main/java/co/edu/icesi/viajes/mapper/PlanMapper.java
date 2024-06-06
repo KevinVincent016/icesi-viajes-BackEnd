@@ -28,7 +28,6 @@ public interface PlanMapper {
     @Mapping(source = "plan.usuCreador", target = "usuCreador")
     @Mapping(source = "plan.usuModificador", target = "usuModificador")
     @Mapping(source = "plan.estado", target = "estado")
-    @Mapping(source = "plan.cliente", target = "cliente")
     @Mapping(source = "plan.usuario", target = "usuario")
     PlanDTO toDTO(Plan plan);
 
@@ -46,7 +45,6 @@ public interface PlanMapper {
     @Mapping(source = "planDTO.usuCreador", target = "usuCreador")
     @Mapping(source = "planDTO.usuModificador", target = "usuModificador")
     @Mapping(source = "planDTO.estado", target = "estado")
-    @Mapping(source = "planDTO.cliente", target = "cliente")
     @Mapping(source = "planDTO.usuario", target = "usuario")
     Plan toEntity(PlanDTO planDTO);
 

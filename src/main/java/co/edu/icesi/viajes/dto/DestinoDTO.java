@@ -11,8 +11,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class DestinoDTO implements Serializable {
 
-
-
     private Integer idDest;
     private String codigo;
     private String nombre;

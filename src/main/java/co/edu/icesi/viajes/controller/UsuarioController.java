@@ -5,6 +5,7 @@ import co.edu.icesi.viajes.dto.UsuarioDTO;
 import co.edu.icesi.viajes.mapper.UsuarioMapper;
 import co.edu.icesi.viajes.service.UsuarioService;
 import co.edu.icesi.viajes.domain.Usuario;
+import co.edu.icesi.viajes.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,10 +42,32 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/usuarios")
+    @GetMapping("/ver-usuarios")
     public ResponseEntity<List<UsuarioDTO>> getAllUsers() {
         List<Usuario> usuarios = usuarioService.findAll();
         List<UsuarioDTO> usuarioDTOs = usuarios.stream().map(UsuarioMapper.INSTANCE::toDTO).collect(Collectors.toList());
         return new ResponseEntity<>(usuarioDTOs, HttpStatus.OK);
     }
+
+    @PutMapping("/modificar-usuario/{id}")
+    public ResponseEntity<?> modificarrUsuario(@PathVariable("id") Integer id, @RequestBody UsuarioDTO usuarioDTO) {
+        try {
+            Usuario usuarioModificado = usuarioService.modificarUsuario(id, usuarioDTO);
+            return ResponseEntity.ok(usuarioModificado);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscar-usuario/{id}")
+    public ResponseEntity<UsuarioDTO> getUser(@PathVariable("id") Integer id) {
+        Usuario usuario = usuarioService.findById(id).orElse(null);
+        if (usuario != null) {
+            UsuarioDTO usuarioDTO = UsuarioMapper.INSTANCE.toDTO(usuario);
+            return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

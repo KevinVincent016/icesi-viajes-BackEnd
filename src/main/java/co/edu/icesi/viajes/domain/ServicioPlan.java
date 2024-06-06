@@ -32,8 +32,4 @@ public class ServicioPlan {
     @JoinColumn(name = "id_add", nullable = false)
     private Servicio servicio;
 
-    @Column(name = "cantidad", nullable = false)
-    private Integer cantidad;
-
-
 }

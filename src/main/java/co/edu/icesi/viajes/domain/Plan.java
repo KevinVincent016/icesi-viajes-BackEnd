@@ -67,11 +67,6 @@ public class Plan {
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "id_clie", nullable = false)
-    private Cliente cliente;
-
-    @ManyToOne
     @JoinColumn(name = "id_usua", nullable = false)
     private Usuario usuario;
-    
 }

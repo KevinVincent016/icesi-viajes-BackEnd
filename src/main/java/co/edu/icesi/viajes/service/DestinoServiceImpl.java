@@ -88,15 +88,14 @@ public class DestinoServiceImpl implements DestinoService{
 
 	@Override
 	public Destino editarDestino(Integer idDestino, Destino destinoActualizado) {
-	    Destino destinoExistente = destinoRepository.findById(idDestino).orElse(null);
-	    if (destinoExistente != null) {
-	        destinoActualizado.setIdDest(idDestino);
-	        destinoActualizado.setFechaModificacion(new Date());
-	        return destinoRepository.save(destinoActualizado);
-	    } else {
-	        
-	        return null;
-	    }
+		Destino destinoExistente = destinoRepository.findById(idDestino).orElse(null);
+		if (destinoExistente != null) {
+			destinoActualizado.setIdDest(idDestino);
+			destinoActualizado.setFechaModificacion(new Date());
+			return destinoRepository.save(destinoActualizado);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
