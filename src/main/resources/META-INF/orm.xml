@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+        				http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd"
+	version="2.2">
+
+	<entity class="co.edu.icesi.viajes.domain.TipoDestino">
+		
+		<named-native-query name="TipoDestino.consultarTipoDestinoPorEstado" result-set-mapping="consultarTipoDestinoPorEstado">
+				
+				<query>
+					
+			        select
+						id_tide idTide, 
+						codigo codigo, 
+						nombre nombre,
+						descripcion descripcion
+						from tipo_destino tide
+						where tide.estado = :pEstado    
+			    
+			    </query>   
+		
+		</named-native-query>		
+			
+	</entity>
+	
+	<entity class="co.edu.icesi.viajes.domain.Cliente">
+		
+		<named-native-query name="Cliente.obtenerClientesConUltimoPlanContratado" result-set-mapping="obtenerClientesConUltimoPlanContratado">
+            
+            <query>
+                
+                SELECT 
+    c.id_clie AS idClie,
+    c.numero_identificacion AS numeroIdentificacion,
+    c.primer_apellido AS primerApellido,
+    c.segundo_apellido AS segundoApellido,
+    c.nombre AS nombre,
+    c.telefono1 AS telefono1,
+    c.telefono2 AS telefono2,
+    c.correo AS correo,
+    c.sexo AS sexo,
+    c.fecha_nacimiento AS fechaNacimiento,
+    c.fecha_creacion AS fechaCreacion,
+    c.fecha_modificacion AS fechaModificacion,
+    c.usu_creador AS usuCreador,
+    c.usu_modificador AS usuModificador,
+    c.estado AS estado,
+    c.id_tiid AS idTiid,
+    dp.id_depl AS idDetallePlan,
+    dp.alimentacion AS alimentacion,
+    dp.hospedaje AS hospedaje,
+    dp.transporte AS transporte,
+    dp.traslados AS traslados,
+    dp.valor AS valor,
+    dp.cantidad_noches AS cantidadNoches,
+    dp.cantidad_dias AS cantidadDias,
+    dp.fecha_creacion AS fechaCreacionDetallePlan,
+    dp.fecha_modificacion AS fechaModificacionDetallePlan,
+    dp.usu_creador AS usuCreadorDetallePlan,
+    dp.usu_modificador AS usuModificadorDetallePlan,
+    dp.estado AS estadoDetallePlan
+FROM 
+    cliente c
+INNER JOIN 
+    plan p ON c.id_clie = p.id_clie
+INNER JOIN 
+    detalle_plan dp ON p.id_plan = dp.id_plan
+WHERE 
+    p.fecha_solicitud = (
+        SELECT 
+            MAX(p2.fecha_solicitud) 
+        FROM 
+            plan p2 
+        WHERE 
+            p2.id_clie = c.id_clie
+    )
+
+            </query>  
+        
+        </named-native-query>		
+
+        <named-native-query name="Cliente.consultarClientesSegunCriterios" result-set-mapping="consultarClientesSegunCriterios">
+            <query>
+
+                SELECT c.estado,
+                c.numero_identificacion numeroIdentificacion,
+                c.id_tiid idTiid,
+                c.nombre
+                FROM cliente c
+                WHERE (:pEstado IS NULL OR estado = :pEstado)
+                AND (:pNumeroIdentificacion IS NULL OR numero_identificacion = :pNumeroIdentificacion)
+                AND (:pTipoIdentificacion IS NULL OR id_tiid = :pTipoIdentificacion)
+                AND (:pNombre IS NULL OR nombre LIKE '%' || :pNombre || '%')
+                ORDER BY nombre ASC;
+
+
+            </query>
+            
+        </named-native-query>
+        
+    </entity>
+	
+
+</entity-mappings>

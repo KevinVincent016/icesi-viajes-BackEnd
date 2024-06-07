@@ -1,0 +1,43 @@
+package co.edu.icesi.viajes.domain;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "reserva")
+public class Reserva {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_reserva")
+    private Integer idReserva;
+
+
+    @Column(name = "id_plan")
+    private Integer idPlan;
+
+    @Column(name = "personas", nullable = false)
+    private Integer personas;
+
+    @Column(name = "valor", nullable = false)
+    private BigDecimal valor;
+
+
+    @Column(name = "id_clie")
+    private Integer idClie;
+
+}
