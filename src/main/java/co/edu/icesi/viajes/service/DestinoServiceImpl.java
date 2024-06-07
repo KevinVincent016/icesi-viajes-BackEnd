@@ -139,7 +139,8 @@ public class DestinoServiceImpl implements DestinoService{
 	private PlanDestinoRepository planDestinoRepository;
 
 	@Override
-	public Integer findMostFrequentDestinationId() {
+	public List<Integer> findMostFrequentDestinationId() {
+
 		return planDestinoRepository.findMostFrequentDestinationId();
 	}
 

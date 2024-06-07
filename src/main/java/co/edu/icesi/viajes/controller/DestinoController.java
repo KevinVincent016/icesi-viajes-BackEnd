@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/destinos")
@@ -77,16 +78,15 @@ public class DestinoController {
     }
 
     @GetMapping("/frecuente")
-    public ResponseEntity<DestinoDTOEndpoint> findMostFrequentDestination() {
-        Integer mostFrequentDestinationId = destinoService.findMostFrequentDestinationId();
-        Optional<Destino> destinoOptional = destinoService.findById(mostFrequentDestinationId);
-
-        if (destinoOptional.isPresent()) {
-            DestinoDTOEndpoint destinoDTO = DestinoEndpointMapper.INSTANCE.toDTOEndpoint(destinoOptional.get());
-            return new ResponseEntity<>(destinoDTO, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<List<DestinoDTOEndpoint>> findMostFrequentDestinations() {
+        List<Integer> mostFrequentDestinationIds = destinoService.findMostFrequentDestinationId();
+        List<DestinoDTOEndpoint> mostFrequentDestinations = mostFrequentDestinationIds.stream()
+                .map(destinoService::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(DestinoEndpointMapper.INSTANCE::toDTOEndpoint)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(mostFrequentDestinations, HttpStatus.OK);
     }
 
 }

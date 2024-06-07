@@ -17,7 +17,7 @@ public interface DestinoService extends GenericService<Destino, Integer>{
 	
 	//TRABAJO FINAL
 
-	Integer findMostFrequentDestinationId();
+	List<Integer> findMostFrequentDestinationId();
 
 	public Destino crearDestino(Destino nuevoDestino);
 
