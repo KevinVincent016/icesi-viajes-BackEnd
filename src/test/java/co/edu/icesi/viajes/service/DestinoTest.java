@@ -95,6 +95,71 @@ class DestinoTest {
 		assertFalse(destinoOptional.isPresent());
 	}
 
+	@Test
+	void debeCrearDestino() throws Exception {
+		// Arrange
+		Destino destino = new Destino();
+		destino.setIdDest(777);
+		destino.setCodigo("D7770");
+		destino.setNombre("miproba");
+		destino.setDescripcion("miproba");
+		destino.setFechaCreacion(new Date());
+		destino.setUsuCreador("CLOPEZ");
+		destino.setEstado("A");
+		destino.setIdTide(1);
+
+		// Act
+		Destino destinoCreado = destinoService.save(destino);
+
+		// Assert
+		assertNotNull(destinoCreado);
+		assertEquals(destino.getCodigo(), destinoCreado.getCodigo());
+		assertEquals(destino.getNombre(), destinoCreado.getNombre());
+		assertEquals(destino.getDescripcion(), destinoCreado.getDescripcion());
+		assertEquals(destino.getFechaCreacion(), destinoCreado.getFechaCreacion());
+		assertEquals(destino.getUsuCreador(), destinoCreado.getUsuCreador());
+		assertEquals(destino.getEstado(), destinoCreado.getEstado());
+		assertEquals(destino.getIdTide(), destinoCreado.getIdTide());
+		destinoService.deleteById(destinoCreado.getIdDest());
+	}
+
+
+	@Test
+	void debeModificarDestino() throws Exception {
+		// Arrange
+		Destino destino = new Destino();
+		destino.setIdDest(777);
+		destino.setCodigo("D7770");
+		destino.setNombre("miproba");
+		destino.setDescripcion("miproba");
+		destino.setFechaCreacion(new Date());
+		destino.setUsuCreador("CLOPEZ");
+		destino.setEstado("A");
+		destino.setIdTide(1);
+
+		Destino destinoCreado = destinoService.save(destino);
+		Integer id = destinoCreado.getIdDest();
+		destinoCreado.setNombre("miproba2");
+		destinoCreado.setDescripcion("miproba2");
+		destinoCreado.setFechaCreacion(new Date());
+		destinoCreado.setUsuCreador("CLOPEZ2");
+		destinoCreado.setEstado("I");
+		destinoCreado.setIdTide(2);
+
+		// Act
+		Destino destinoActualizado = destinoService.update(destinoCreado);
+
+		// Assert
+		assertNotNull(destinoActualizado);
+		assertEquals(destinoCreado.getCodigo(), destinoActualizado.getCodigo());
+		assertEquals(destinoCreado.getNombre(), destinoActualizado.getNombre());
+		assertEquals(destinoCreado.getDescripcion(), destinoActualizado.getDescripcion());
+		assertEquals(destinoCreado.getFechaCreacion(), destinoActualizado.getFechaCreacion());
+		assertEquals(destinoCreado.getUsuCreador(), destinoActualizado.getUsuCreador());
+		assertEquals(destinoCreado.getEstado(), destinoActualizado.getEstado());
+		assertEquals(destinoCreado.getIdTide(), destinoActualizado.getIdTide());
+		destinoService.deleteById(id);
+	}
 
 
 

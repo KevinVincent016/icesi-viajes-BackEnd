@@ -4,6 +4,7 @@ import co.edu.icesi.viajes.domain.Plan;
 import co.edu.icesi.viajes.dto.PlanDTO;
 import co.edu.icesi.viajes.mapper.PlanMapper;
 import co.edu.icesi.viajes.service.PlanService;
+import co.edu.icesi.viajes.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,9 @@ public class PlanController {
 
     @Autowired
     private PlanService planService;
+
+    @Autowired
+    private ReservaService reservaService;
 
     @PostMapping("/crear")
     public ResponseEntity<PlanDTO> crearPlan(@RequestBody PlanDTO planDTO) throws Exception {
@@ -60,4 +64,12 @@ public class PlanController {
         List<PlanDTO> planDTOs = planes.stream().map(PlanMapper.INSTANCE::toDTO).collect(Collectors.toList());
         return new ResponseEntity<>(planDTOs, HttpStatus.OK);
     }
+
+    @GetMapping("/masReservado")
+    public ResponseEntity<PlanDTO> getMasReservado() {
+        int idPlanMasReservado = reservaService.findMostReservedPlanId();
+        Plan plan = planService.findById(idPlanMasReservado).orElse(null);
+        return new ResponseEntity<>(PlanMapper.INSTANCE.toDTO(plan), HttpStatus.OK);
+    }
+
 }

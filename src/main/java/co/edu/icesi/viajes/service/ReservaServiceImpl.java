@@ -80,4 +80,14 @@ public class ReservaServiceImpl implements ReservaService{
     public Long count() {
         return reservaRepository.count();
     }
+
+    @Override
+    public Integer findMostReservedPlanId() {
+        return reservaRepository.findMostReservedPlanId();
+    }
+
+    @Override
+    public List<Integer> findTop3ClientsWithMostReservations() {
+        return reservaRepository.findTop3ClientsWithMostReservations();
+    }
 }

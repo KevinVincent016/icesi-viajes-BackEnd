@@ -124,7 +124,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		Usuario usuario = optionalUsuario.get();
 
 		Usuario defaultUser = usuarioRepository.findByLoginU("DEFAULT");
-		
+
 		List<Plan> planes = planRepository.findByUsuarioId(usuario.getIdUsua());
 		for (Plan plan : planes) {
 			plan.setUsuario(defaultUser);
