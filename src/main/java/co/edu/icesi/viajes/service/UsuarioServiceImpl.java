@@ -77,8 +77,6 @@ public class UsuarioServiceImpl implements UsuarioService{
         }
         usuario.setFechaCreacion(new Date());
         usuario.setFechaModificacion(new Date());
-        usuario.setUsuCreador("CLOPEZ");
-        usuario.setUsuModificador("CLOPEZ");
         return usuarioRepository.save(usuario);
     }
 
@@ -101,5 +99,16 @@ public class UsuarioServiceImpl implements UsuarioService{
 			throw new Exception("El usuario con ID " + id + " no fue encontrado");
 		}
 	}
+	@Override
+	public Usuario eliminarUsuario(Integer id) throws Exception {
+		Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
+		if (optionalUsuario.isPresent()) {
+			usuarioRepository.deleteById(id);
+
+		} else {
+			throw new Exception("El usuario con ID " + id + " no fue encontrado");
+		}
+        return null;
+    }
 	
 }

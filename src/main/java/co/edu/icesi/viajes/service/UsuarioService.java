@@ -7,5 +7,6 @@ public interface UsuarioService extends GenericService<Usuario, Integer> {
     Usuario logearUsuario(String login, String password);
     Usuario crearUsuario(Usuario usuario) throws Exception;
     Usuario modificarUsuario(Integer id, UsuarioDTO usuarioDTO) throws Exception;
+    Usuario eliminarUsuario(Integer id) throws Exception;
 }
 
