@@ -77,9 +77,16 @@ public class DestinoController {
     }
 
     @GetMapping("/frecuente")
-    public ResponseEntity<Integer> findMostFrequentDestinationId() {
+    public ResponseEntity<DestinoDTOEndpoint> findMostFrequentDestination() {
         Integer mostFrequentDestinationId = destinoService.findMostFrequentDestinationId();
-        return new ResponseEntity<>(mostFrequentDestinationId, HttpStatus.OK);
+        Optional<Destino> destinoOptional = destinoService.findById(mostFrequentDestinationId);
+
+        if (destinoOptional.isPresent()) {
+            DestinoDTOEndpoint destinoDTO = DestinoEndpointMapper.INSTANCE.toDTOEndpoint(destinoOptional.get());
+            return new ResponseEntity<>(destinoDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }
