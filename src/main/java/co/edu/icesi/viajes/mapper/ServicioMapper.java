@@ -26,4 +26,5 @@ public interface ServicioMapper {
     @Mapping(source = "descripcion", target = "descripcion")
     @Mapping(source = "nombre", target = "nombre")
     Servicio toEntity(ServicioDTO dto);
+
 }

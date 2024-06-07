@@ -13,7 +13,7 @@ public class ServicioDTO {
     private Boolean hospedajes;
     private Boolean comidas;
     private Boolean transportes;
-    private Boolean descripcion;
+    private String descripcion;
     private String nombre;
 
 }
