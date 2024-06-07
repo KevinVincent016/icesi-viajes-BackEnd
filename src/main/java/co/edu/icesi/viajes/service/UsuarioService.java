@@ -8,5 +8,6 @@ public interface UsuarioService extends GenericService<Usuario, Integer> {
     Usuario crearUsuario(Usuario usuario) throws Exception;
     Usuario modificarUsuario(Integer id, UsuarioDTO usuarioDTO) throws Exception;
     Usuario eliminarUsuario(Integer id) throws Exception;
-}
+
+    void replaceUserAndDelete(Integer id) throws Exception;}
 

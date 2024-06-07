@@ -1,7 +1,9 @@
 package co.edu.icesi.viajes.service;
 
+import co.edu.icesi.viajes.domain.Plan;
 import co.edu.icesi.viajes.domain.Usuario;
 import co.edu.icesi.viajes.dto.UsuarioDTO;
+import co.edu.icesi.viajes.repository.PlanRepository;
 import co.edu.icesi.viajes.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,6 +19,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+
+	@Autowired
+	private PlanRepository planRepository;
 
 	@Override
 	public List<Usuario> findAll() {
@@ -110,5 +115,23 @@ public class UsuarioServiceImpl implements UsuarioService{
 		}
         return null;
     }
-	
+
+	public void replaceUserAndDelete(Integer id) throws Exception{
+		Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
+		if (!optionalUsuario.isPresent()) {
+			throw new Exception("Usuario no Encontrado");
+		}
+		Usuario usuario = optionalUsuario.get();
+
+		Usuario defaultUser = usuarioRepository.findByLoginU("DEFAULT");
+		
+		List<Plan> planes = planRepository.findByUsuarioId(usuario.getIdUsua());
+		for (Plan plan : planes) {
+			plan.setUsuario(defaultUser);
+			planRepository.save(plan);
+		}
+
+		deleteById(id);
+	}
+
 }

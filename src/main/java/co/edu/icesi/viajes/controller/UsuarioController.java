@@ -72,12 +72,11 @@ public class UsuarioController {
     @DeleteMapping("/eliminar-usuario/{id}")
     public ResponseEntity<?> eliminarUsuario(@PathVariable("id") Integer id) {
         try {
-            usuarioService.eliminarUsuario(id);
+            usuarioService.replaceUserAndDelete(id);
             return ResponseEntity.ok("Usuario eliminado exitosamente");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
 
 }
