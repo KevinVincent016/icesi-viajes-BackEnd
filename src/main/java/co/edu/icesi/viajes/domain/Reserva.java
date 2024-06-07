@@ -26,7 +26,7 @@ public class Reserva {
     @Column(name = "id_reserva")
     private Integer idReserva;
 
-    @Id
+
     @Column(name = "id_plan")
     private Integer idPlan;
 
@@ -36,7 +36,7 @@ public class Reserva {
     @Column(name = "valor", nullable = false)
     private BigDecimal valor;
 
-    @Id
+
     @Column(name = "id_clie")
     private Integer idClie;
 

@@ -1,5 +1,6 @@
 package co.edu.icesi.viajes.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,6 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ReservaDTO {
 
 
@@ -16,10 +18,5 @@ public class ReservaDTO {
     private BigDecimal valor;
     private PlanDTO plan;
 
-    public ReservaDTO(Integer idReserva, Integer personas, BigDecimal valor, PlanDTO plan) {
-        this.idReserva = idReserva;
-        this.personas = personas;
-        this.valor = valor;
-        this.plan = plan;
-    }
+
 }
