@@ -22,7 +22,7 @@ public class PlanController {
 
     @PostMapping("/crear")
     public ResponseEntity<PlanDTO> crearPlan(@RequestBody PlanDTO planDTO) throws Exception {
-        Plan createdPlan = planService.save(PlanMapper.INSTANCE.toEntity(planDTO));
+        Plan createdPlan = planService.crearPlan(PlanMapper.INSTANCE.toEntity(planDTO));
         return new ResponseEntity<>(PlanMapper.INSTANCE.toDTO(createdPlan), HttpStatus.CREATED);
     }
 

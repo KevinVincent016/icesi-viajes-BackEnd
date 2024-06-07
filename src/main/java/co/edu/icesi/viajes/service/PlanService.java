@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface PlanService extends GenericService<Plan, Integer>{
 	public List<Plan> findTop3ByOrderByFechaCreacionDesc();
-	
+	Plan crearPlan(Plan nuevoPlan);
 
 }

@@ -16,6 +16,7 @@ public interface ServicioMapper {
     @Mapping(source = "comidas", target = "comidas")
     @Mapping(source = "transportes", target = "transportes")
     @Mapping(source = "descripcion", target = "descripcion")
+    @Mapping(source = "nombre", target = "nombre")
     ServicioDTO toDto(Servicio servicio);
 
     @Mapping(source = "idAdd", target = "idAdd")
@@ -23,5 +24,6 @@ public interface ServicioMapper {
     @Mapping(source = "comidas", target = "comidas")
     @Mapping(source = "transportes", target = "transportes")
     @Mapping(source = "descripcion", target = "descripcion")
+    @Mapping(source = "nombre", target = "nombre")
     Servicio toEntity(ServicioDTO dto);
 }

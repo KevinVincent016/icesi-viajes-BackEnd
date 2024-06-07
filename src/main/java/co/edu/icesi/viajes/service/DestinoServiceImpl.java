@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import co.edu.icesi.viajes.repository.PlanDestinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ public class DestinoServiceImpl implements DestinoService{
 	private DestinoRepository destinoRepository;
 	
 	private static int contador = 0;
+
+
 
 	@Override
 	public List<Destino> findAll() {
@@ -131,6 +134,14 @@ public class DestinoServiceImpl implements DestinoService{
         
         return destinoRepository.save(nuevoDestino);
     }
+
+	@Autowired
+	private PlanDestinoRepository planDestinoRepository;
+
+	@Override
+	public Integer findMostFrequentDestinationId() {
+		return planDestinoRepository.findMostFrequentDestinationId();
+	}
 
 
 }

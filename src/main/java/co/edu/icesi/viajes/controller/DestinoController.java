@@ -76,4 +76,10 @@ public class DestinoController {
         }
     }
 
+    @GetMapping("/frecuente")
+    public ResponseEntity<Integer> findMostFrequentDestinationId() {
+        Integer mostFrequentDestinationId = destinoService.findMostFrequentDestinationId();
+        return new ResponseEntity<>(mostFrequentDestinationId, HttpStatus.OK);
+    }
+
 }

@@ -16,7 +16,9 @@ public interface DestinoService extends GenericService<Destino, Integer>{
 	//List<Destino> findDestinoActivo();
 	
 	//TRABAJO FINAL
-	
+
+	Integer findMostFrequentDestinationId();
+
 	public Destino crearDestino(Destino nuevoDestino);
 
 	public Destino editarDestino(Integer idDestino, Destino destinoActualizado);

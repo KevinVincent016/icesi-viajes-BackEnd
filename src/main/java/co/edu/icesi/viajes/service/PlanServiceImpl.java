@@ -2,6 +2,7 @@ package co.edu.icesi.viajes.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -16,6 +17,8 @@ public class PlanServiceImpl implements PlanService{
 	
 	@Autowired
 	private PlanRepository planRepository;
+
+	private static int contador = 0;
 
 	@Override
 	public List<Plan> findAll() {
@@ -70,4 +73,26 @@ public class PlanServiceImpl implements PlanService{
 	public List<Plan> findTop3ByOrderByFechaCreacionDesc() {
 		return planRepository.findTop3ByOrderByFechaCreacionDesc();
 	}
+
+	@Override
+	public Plan crearPlan(Plan nuevoPlan) {
+		// Incrementa el contador
+		contador++;
+
+		// Genera el código del plan con el formato "P0001"
+		String codigo = "P" + String.format("%04d", contador);
+
+		// Asigna el código al plan
+		nuevoPlan.setCodigo(codigo);
+
+		// Resto de la lógica para guardar el plan en la base de datos
+		// ...
+
+		// Guarda el plan en la base de datos
+		nuevoPlan.setFechaCreacion(new Date());
+		nuevoPlan.setFechaModificacion(new Date());
+
+		return planRepository.save(nuevoPlan);
+	}
+
 }

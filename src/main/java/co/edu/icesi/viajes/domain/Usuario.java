@@ -54,7 +54,12 @@ public class Usuario {
     @Column(name = "idrol", nullable = false)
     private Integer idRol;
 
+    public String getPassword() {
+        return passwordU;
+    }
 
-    
+    public String getUsername() {
+        return loginU;
+    }
     
 }

@@ -32,6 +32,9 @@ public class Servicio {
     private Boolean transportes;
 
     @Column(name = "descripcion")
-    private Boolean descripcion;
+    private String descripcion;
+
+    @Column(name = "nombre")
+    private String nombre;
 
 }
